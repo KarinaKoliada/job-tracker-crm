@@ -1,0 +1,29 @@
+"use client";
+import { navItems } from "@/config/navItems";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+export default function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="w-64 border-r p-4">
+      <nav className="flex flex-col gap-4">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.href}
+              className={`flex items-center gap-2 p-2 rounded transition-all duration-200 ease-in-out ${isActive ? "bg-gray-200/70 shadow-sm font-medium" : "hover:bg-gray-100 "}`}
+              href={item.href}
+            >
+              {Icon && <Icon size={18} />}
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </aside>
+  );
+}
