@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Rubik } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+
+const rubik = Rubik({
   subsets: ["latin"],
+  variable: "--font-rubik",
 });
 
 export const metadata: Metadata = {
@@ -26,15 +25,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${rubik.variable} ${rubik.variable} h-full antialiased`}
     >
       <body>
-        <div className="flex min-h-screen">
-          <Sidebar />
-          <main className="flex-1 px-6 py-4 md:px-10 md:py-10 lg:px-20">
-            <div className="max-w-7xl">{children}</div>
-          </main>
-        </div>
+        <ThemeProvider>
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <main className="flex-1 px-6 py-4 md:px-10 md:py-10 lg:px-20">
+              <div className="max-w-7xl">{children}</div>
+            </main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
