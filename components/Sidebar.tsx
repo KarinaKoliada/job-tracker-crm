@@ -8,7 +8,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 border-r p-4">
+    <aside className="w-44 border-r p-4">
       <nav className="flex flex-col gap-4">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
@@ -16,7 +16,14 @@ export default function Sidebar() {
           return (
             <Link
               key={item.href}
-              className={`flex items-center gap-2 p-2 rounded transition-all duration-200 ease-in-out ${isActive ? "bg-gray-200/70 shadow-sm font-medium" : "hover:bg-gray-100 "}`}
+              className={`
+    flex items-center gap-2 p-2 rounded-md transition
+    ${
+      isActive
+        ? "bg-primary/10 text-primary"
+        : "text-muted-foreground hover:bg-muted"
+    }
+  `}
               href={item.href}
             >
               {Icon && <Icon size={18} />}

@@ -6,7 +6,7 @@ export default function ThemeToggle() {
 
   return (
     <Button
-      className="w-10"
+      className="w-10 border-none"
       variant="outline"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
