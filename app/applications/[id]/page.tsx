@@ -126,7 +126,6 @@ export default function ApplicationDetailsPage() {
           )}
         </div>
 
-        {/* BODY */}
         <div className=" text-sm flex flex-col md:flex-row md:justify-between md:items-center mt-5 gap-5">
           <div className="flex items-center gap-2">
             <MapPin className="w-5 h-5" />
@@ -203,7 +202,6 @@ export default function ApplicationDetailsPage() {
       </Card>
       <Card>
         <CardContent className="p-6 space-y-6">
-          {/* NOTES */}
           <div className="space-y-2">
             <h2 className="font-medium">Notes</h2>
             {isEditing ? (
@@ -221,7 +219,6 @@ export default function ApplicationDetailsPage() {
             )}
           </div>
 
-          {/* ACTIONS */}
         </CardContent>
       </Card>
       <div className="max-w-3xl  mx-auto flex gap-3">
