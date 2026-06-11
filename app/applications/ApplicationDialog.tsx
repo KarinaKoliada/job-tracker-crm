@@ -7,15 +7,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import ApplicationForm from "./ApplicationForm";
 import { Plus } from "lucide-react";
+import ApplicationForm from "./ApplicationSteps";
 
 export default function ApplicationDialog() {
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button>
           <Plus className="w-4 h-4 text-muted" />
           Add Application
@@ -27,7 +27,7 @@ export default function ApplicationDialog() {
           <DialogTitle>Add New Application</DialogTitle>
           <span>Fill in the details of your job application</span>
         </DialogHeader>
-        <ApplicationForm />
+        <ApplicationForm onClose={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );

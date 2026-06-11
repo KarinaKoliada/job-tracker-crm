@@ -13,13 +13,18 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useApplicationsStore } from "@/ store/useApplications";
 
-export default function ApplicationSteps() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function ApplicationForm({ onClose }: Props) {
   const steps = ["company", "details", "notes"] as const;
   type Step = (typeof steps)[number];
   const [currentStep, setCurrentStep] = useState<Step>("company");
   const currentIndex = steps.indexOf(currentStep);
-
+  const addApplication = useApplicationsStore((state) => state.addApplication);
   const [form, setForm] = useState<Omit<Application, "id">>({
     company: "",
     position: "",
@@ -51,7 +56,17 @@ export default function ApplicationSteps() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(form);
+    addApplication({
+      company: form.company,
+      position: form.position,
+      location: form.location,
+      source: form.source,
+      status: form.status,
+      notes: form.notes,
+      appliedAt: form.appliedAt,
+    });
+
+    onClose();
   };
 
   const isStepValid = () => {
@@ -64,6 +79,8 @@ export default function ApplicationSteps() {
         return true;
     }
   };
+
+  console.log("FORM");
   const renderStep = () => {
     switch (currentStep) {
       case "company":

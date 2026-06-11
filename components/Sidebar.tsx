@@ -8,8 +8,8 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-44 border-r p-4">
-      <nav className="flex flex-col gap-4">
+    <aside className="w-44 border-r p-4 h-screen sticky top-0 flex flex-col ">
+      <nav className="flex flex-col gap-4 flex-1">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
@@ -31,8 +31,8 @@ export default function Sidebar() {
             </Link>
           );
         })}
-        <ThemeToggle />
       </nav>
+      <ThemeToggle />
     </aside>
   );
 }

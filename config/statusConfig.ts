@@ -19,6 +19,6 @@ export const statusConfig: StatusConfig = {
   },
   ghosted: {
     label: "Ghosted",
-    className: "bg-gray-100 text-gray-700 ",
+    className: "bg-gray-100 text-gray-700 rounded-lg px-2",
   },
 } as const;

@@ -3,16 +3,32 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { applications } from "@/config/applications";
 import { filters } from "@/config/filters";
 import { statusConfig } from "@/config/statusConfig";
 import { Filter } from "@/types/status";
 import { useState } from "react";
 import ApplicationDialog from "./ApplicationDialog";
+import { useApplicationsStore } from "@/ store/useApplications";
+import { useRouter } from "next/navigation";
 
+ export  const getAvatarStyle = (company: string) => {
+    const colors = [
+      "bg-primary/10 text-primary",
+      "bg-pink-500/10 text-pink-500",
+      "bg-green-500/10 text-green-500",
+      "bg-yellow-500/10 text-yellow-500",
+      "bg-blue-500/10 text-blue-500",
+      "bg-purple-500/10 text-purple-500",
+    ];
+
+    return colors[company.charCodeAt(0) % colors.length];
+ };
+  
 export default function ApplicationPage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
+  const applications = useApplicationsStore((state) => state.applications);
+  const router = useRouter();
 
   const statusFiltered =
     filter === "all"
@@ -27,19 +43,8 @@ export default function ApplicationPage() {
     );
   });
 
-  const getAvatarStyle = (company: string) => {
-    const colors = [
-      "bg-primary/10 text-primary",
-      "bg-pink-500/10 text-pink-500",
-      "bg-green-500/10 text-green-500",
-      "bg-yellow-500/10 text-yellow-500",
-      "bg-blue-500/10 text-blue-500",
-      "bg-purple-500/10 text-purple-500",
-    ];
 
-    return colors[company.charCodeAt(0) % colors.length];
-  };
-
+  console.log("PAGE", applications);
   return (
     <div className="space-y-8">
       <ApplicationDialog />
@@ -83,6 +88,7 @@ export default function ApplicationPage() {
           return (
             <Card
               key={item.id}
+              onClick={() => router.push(`/applications/${item.id}`)}
               className="
                 bg-card
                 border border-border
@@ -95,24 +101,20 @@ export default function ApplicationPage() {
                 <div className="flex justify-between ">
                   <div
                     className={`w-12 h-12 rounded-lg flex items-center justify-center font-semibold ${getAvatarStyle(
-                      item.company
+                      item.company,
                     )}`}
                   >
                     {item.company[0]}
                   </div>
 
-                  <CardAction className={status.className }>
+                  <CardAction className={status.className}>
                     {status.label}
                   </CardAction>
                 </div>
 
                 <CardTitle>
-                  <div className="text-foreground text-xl">
-                    {item.company}
-                  </div>
-                  <div className="text-muted-foreground">
-                    {item.position}
-                  </div>
+                  <div className="text-foreground text-xl">{item.company}</div>
+                  <div className="text-muted-foreground">{item.position}</div>
                 </CardTitle>
 
                 <div className="text-sm text-muted-foreground space-y-2">
