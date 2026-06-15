@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/select";
 import { getAvatarStyle } from "../page";
 import { Calendar, ExternalLink, MapPin } from "lucide-react";
+import ApplicationTimeline from "../ApplicationTimeline";
+import { ApplicationStatus } from "@/types/status";
 
 const sources = ["Linkedin", "Company site", "Referral", "Other"] as const;
 
@@ -30,11 +32,19 @@ export default function ApplicationDetailsPage() {
 
   const application = applications.find((app) => app.id === id);
   const [isEditing, setIsEditing] = useState(false);
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<{
+    company: string;
+    position: string;
+    location: string;
+    source: "Linkedin" | "Company site" | "Referral" | "Other";
+    status: ApplicationStatus;
+    appliedAt: string;
+    notes: string;
+  }>({
     company: application?.company || "",
     position: application?.position || "",
     location: application?.location || "",
-    source: application?.source || "",
+    source: application?.source || "Linkedin",
     status: application?.status || "applied",
     appliedAt: application?.appliedAt || "",
     notes: application?.notes || "",
@@ -154,7 +164,10 @@ export default function ApplicationDetailsPage() {
                   <Select
                     value={form.source}
                     onValueChange={(value) =>
-                      setForm((prev) => ({ ...prev, source: value }))
+                      setForm((prev) => ({
+                        ...prev,
+                        source: value as typeof form.source,
+                      }))
                     }
                   >
                     <SelectTrigger className="w-48">
@@ -200,6 +213,7 @@ export default function ApplicationDetailsPage() {
           </div>
         </div>
       </Card>
+      <ApplicationTimeline applicationId={id} />
       <Card>
         <CardContent className="p-6 space-y-6">
           <div className="space-y-2">
@@ -218,7 +232,6 @@ export default function ApplicationDetailsPage() {
               </p>
             )}
           </div>
-
         </CardContent>
       </Card>
       <div className="max-w-3xl  mx-auto flex gap-3">

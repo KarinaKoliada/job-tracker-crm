@@ -9,4 +9,9 @@ export type Application = {
   source?: "Linkedin" | "Company site" | "Referral" | "Other";
   appliedAt: string;
   notes?: string;
-}
+
+  timeline?: {
+    status: ApplicationStatus;
+    date: string;
+  }[];
+};
