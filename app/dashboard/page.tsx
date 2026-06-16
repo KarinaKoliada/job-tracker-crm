@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DashboardCards from "./DashboardCards";
+import { StatusDistribution } from "./StatusDistribution";
+import DashboardStatsCards from "./DashboardStatsCards";
+import { DashboardCards } from "./DashboardCards";
 
 export default function DashboardPage() {
   return (
@@ -9,6 +10,8 @@ export default function DashboardPage() {
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <Button variant="outline">Add application</Button>
       </div>
+      <DashboardStatsCards />
+      <StatusDistribution />
       <DashboardCards />
     </div>
   );

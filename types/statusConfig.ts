@@ -5,5 +5,6 @@ export type StatusConfig = Record<
   {
     label: string;
     className: string;
+    hex: string;
   }
 >;

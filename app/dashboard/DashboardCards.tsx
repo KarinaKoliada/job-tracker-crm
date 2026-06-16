@@ -1,76 +1,71 @@
-"use client";
+'use client'
 import { useApplicationsStore } from "@/ store/useApplications";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  LucideBriefcase,
-  LucideCheckCircle,
-  LucideUsers,
-  LucideX,
-} from "lucide-react";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import Link from "next/link";
+import { statusConfig } from "@/config/statusConfig";
+import { getAvatarStyle } from "../applications/page";
 
-export default function DashboardCards() {
-  const { applications } = useApplicationsStore();
+export function DashboardCards() {
+  const applications = useApplicationsStore((state) => state.applications);
+  const recentApplications = [...applications]
+    .sort(
+      (a, b) =>
+        new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime(),
+    )
+    .slice(0, 5);
 
-  const total = applications.length;
-  const interviews = applications.filter(
-    (app) => app.status === "interview",
-  ).length;
-  const offers = applications.filter((app) => app.status === "offer").length;
-  const rejected = applications.filter(
-    (app) => app.status === "rejected",
-  ).length;
-
-  const stats = [
-    {
-      label: "Total Applications",
-      value: total,
-      icon: LucideBriefcase,
-      color: "text-primary bg-orange-500/10",
-    },
-    {
-      label: "Interviews",
-      value: interviews,
-      icon: LucideUsers,
-      color: "text-blue-500 bg-blue-500/10",
-    },
-    {
-      label: "Offers",
-      value: offers,
-      icon: LucideCheckCircle,
-      color: "text-green-500 bg-green-500/10",
-    },
-    {
-      label: "Rejected",
-      value: rejected,
-      icon: LucideX,
-      color: "text-red-500 bg-red-500/10",
-    },
-  ];
   return (
-    <div className="grid lg:grid-cols-2 gap-4">
-      {stats.map((stat) => {
-        const Icon = stat.icon;
-        return (
-          <Card
-            key={stat.label}
-            className="flex flex-row items-center justify-between p-4"
-          >
-            <CardHeader className="p-0 flex-1 min-w-0">
-              <CardTitle className="text-sm">
-                <p>{stat.label}</p>
-              </CardTitle>
-              <p className="text-2xl font-semibold">
-                {stat.value.toLocaleString()}
-              </p>
-            </CardHeader>
-            <div
-              className={`w-10 h-10 rounded-lg flex items-center justify-center ${stat.color}`}
-            >
-              <Icon className="w-5 h-5" />
-            </div>
-          </Card>
-        );
-      })}
-    </div>
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>Recent Applications</CardTitle>
+        <Link href="/applications" className="text-sm text-primary">
+          View all
+        </Link>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Company</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Date Applied</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {recentApplications.map((app) => {
+              const status = statusConfig[app.status];
+              return (
+                <TableRow key={app.id}>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm ${getAvatarStyle(app.company)}`}
+                      >
+                        {app.company[0]}
+                      </div>
+                      {app.company}
+                    </div>
+                  </TableCell>
+                  <TableCell>{app.position}</TableCell>
+                  <TableCell>
+                    <span className={status.className}>{status.label}</span>
+                  </TableCell>
+                  <TableCell>{app.appliedAt}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }

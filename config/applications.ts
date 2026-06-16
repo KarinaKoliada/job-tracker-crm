@@ -117,4 +117,105 @@ export const applications: Application[] = [
       { status: "interview", date: "2026-06-02" },
     ],
   },
+  {
+    id: 9,
+    company: "Trivago",
+    position: "Frontend Developer",
+    status: "applied",
+    location: "Düsseldorf",
+    source: "Linkedin",
+    appliedAt: "2026-06-12",
+    notes:
+      "Found through Linkedin job alert. Stack matches well — React, Next.js, TypeScript.",
+    timeline: [{ status: "applied", date: "2026-06-12" }],
+  },
+  {
+    id: 10,
+    company: "Personio",
+    position: "Frontend Developer",
+    status: "interview",
+    location: "Munich",
+    source: "Company site",
+    appliedAt: "2026-05-29",
+    notes:
+      "First interview was a culture fit call. Take-home assignment due in a few days.",
+    timeline: [
+      { status: "applied", date: "2026-05-29" },
+      { status: "interview", date: "2026-06-04" },
+    ],
+  },
+  {
+    id: 11,
+    company: "Booking.com",
+    position: "Frontend Developer",
+    status: "rejected",
+    location: "Amsterdam",
+    source: "Linkedin",
+    appliedAt: "2026-04-02",
+    notes:
+      "Rejected after the first technical screening. Feedback mentioned wanting more experience with large-scale systems.",
+    timeline: [
+      { status: "applied", date: "2026-04-02" },
+      { status: "interview", date: "2026-04-10" },
+      { status: "rejected", date: "2026-04-18" },
+    ],
+  },
+  {
+    id: 12,
+    company: "Adyen",
+    position: "Frontend Developer",
+    status: "offer",
+    location: "Amsterdam",
+    source: "Referral",
+    appliedAt: "2026-03-05",
+    notes:
+      "Long process but worth it — offer received with a relocation bonus. Reviewing contract details now.",
+    timeline: [
+      { status: "applied", date: "2026-03-05" },
+      { status: "interview", date: "2026-03-18" },
+      { status: "offer", date: "2026-04-08" },
+    ],
+  },
+  {
+    id: 13,
+    company: "Wolt",
+    position: "Frontend Developer",
+    status: "ghosted",
+    location: "Berlin",
+    source: "Company site",
+    appliedAt: "2026-02-22",
+    notes:
+      "Passed two rounds, then recruiter stopped responding. Following up didn't help.",
+    timeline: [
+      { status: "applied", date: "2026-02-22" },
+      { status: "interview", date: "2026-03-01" },
+    ],
+  },
+  {
+    id: 14,
+    company: "HelloFresh",
+    position: "Frontend Developer",
+    status: "applied",
+    location: "Berlin",
+    source: "Linkedin",
+    appliedAt: "2026-06-14",
+    notes:
+      "Applied directly on Linkedin, role mentions Vue but stack is flexible based on job description.",
+    timeline: [{ status: "applied", date: "2026-06-14" }],
+  },
+  {
+    id: 15,
+    company: "Celonis",
+    position: "Frontend Developer",
+    status: "interview",
+    location: "Munich",
+    source: "Referral",
+    appliedAt: "2026-04-28",
+    notes:
+      "Referral from a friend on the team. Second interview is a pairing session with a senior engineer.",
+    timeline: [
+      { status: "applied", date: "2026-04-28" },
+      { status: "interview", date: "2026-05-06" },
+    ],
+  },
 ];
