@@ -6,7 +6,7 @@ import { Card, CardContent, CardAction } from "@/components/ui/card";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
 import { statusConfig } from "@/config/statusConfig";
 import {
   Select,
@@ -19,6 +19,17 @@ import { getAvatarStyle } from "../page";
 import { Calendar, ExternalLink, MapPin } from "lucide-react";
 import ApplicationTimeline from "../ApplicationTimeline";
 import { ApplicationStatus } from "@/types/status";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const sources = ["Linkedin", "Company site", "Referral", "Other"] as const;
 
@@ -253,9 +264,29 @@ export default function ApplicationDetailsPage() {
             Edit
           </Button>
         )}
-        <Button className="flex-1" variant="destructive" onClick={handleDelete}>
-          Delete
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button className="flex-1" variant="destructive">
+              Delete
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                Are you sure you want to delete this application?
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDelete}>
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );
