@@ -2,7 +2,6 @@
 import { navItems } from "@/config/navItems";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ThemeToggle from "./theme-toggle";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -32,7 +31,6 @@ export default function Sidebar() {
           );
         })}
       </nav>
-      <ThemeToggle />
     </aside>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { useApplicationStats } from "@/hooks/useApplicationsStats";
 import { getMonthlyChange } from "@/lib/dashboardStats";
 import {
   LucideBriefcase,
@@ -17,14 +18,7 @@ export default function DashboardStatsCards() {
   const offersChange = getMonthlyChange(applications, "offer");
   const rejectedChange = getMonthlyChange(applications, "rejected");
 
-  const total = applications.length;
-  const interviews = applications.filter(
-    (app) => app.status === "interview",
-  ).length;
-  const offers = applications.filter((app) => app.status === "offer").length;
-  const rejected = applications.filter(
-    (app) => app.status === "rejected",
-  ).length;
+  const { total, interviews, offers, rejected } = useApplicationStats();
 
   const stats = [
     {
@@ -58,7 +52,7 @@ export default function DashboardStatsCards() {
   ];
 
   return (
-    <div className="grid lg:grid-cols-2 gap-4">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
       {stats.map((stat) => {
         const Icon = stat.icon;
         return (

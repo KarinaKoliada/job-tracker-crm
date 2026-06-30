@@ -1,5 +1,6 @@
 "use client";
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
+import { Card } from "@/components/ui/card";
 import { statusConfig } from "@/config/statusConfig";
 import { PieChart, Pie, ResponsiveContainer, Cell, Tooltip } from "recharts";
 
@@ -17,30 +18,36 @@ export function StatusDistribution() {
     .filter((item) => item.count > 0);
 
   return (
-    <div>
+    <Card>
       <h2 className="font-medium mb-4">Status Distribution</h2>
-      <ResponsiveContainer width="100%" height={250}>
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="count"
-            nameKey="label"
-            innerRadius={60}
-            outerRadius={90}
-            paddingAngle={2}
-            stroke="none"
-          >
-            {data.map((entry) => (
-              <Cell
-                key={entry.status}
-                fill={entry.hex}
-                style={{ outline: "none" }}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
+      <div className="relative">
+        <ResponsiveContainer width="100%" height={250}>
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey="count"
+              nameKey="label"
+              innerRadius={60}
+              outerRadius={90}
+              paddingAngle={2}
+              stroke="none"
+            >
+              {data.map((entry) => (
+                <Cell
+                  key={entry.status}
+                  fill={entry.hex}
+                  style={{ outline: "none" }}
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+        <div className="absolute flex inset-0 flex-col items-center justify-center pointer-events-none">
+          <span className="text-2xl font-semibold">{total}</span>
+          <span className="text-xs text-muted-foreground"> Total</span>
+        </div>
+      </div>
       <div className="mt-4 space-y-2">
         {data.map((item) => (
           <div
@@ -58,6 +65,6 @@ export function StatusDistribution() {
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   );
 }

@@ -1,5 +1,5 @@
-'use client'
-import { useApplicationsStore } from "@/ store/useApplications";
+"use client";
+import { useApplicationsStore } from "@/store/useApplications";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -20,7 +20,7 @@ export function DashboardCards() {
       (a, b) =>
         new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime(),
     )
-    .slice(0, 5);
+    .slice(0, 8);
 
   return (
     <Card>
