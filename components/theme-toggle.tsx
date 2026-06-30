@@ -6,7 +6,6 @@ export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
@@ -18,7 +17,7 @@ export default function ThemeToggle() {
 
   return (
     <Button
-      className="w-10 border-none"
+      className="w-10 border-none "
       variant="outline"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
