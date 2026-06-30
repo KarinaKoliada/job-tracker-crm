@@ -28,6 +28,7 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
+  --color-chart: var(--chart);
 }
 
 :root {
@@ -50,29 +51,31 @@
   --ring: #e11d48;
   --destructive: #dc2626;
   --radius: 0.625rem;
-  --third: #d4b6bc;
+  --chart: #5ea0e2;
+
 }
 
 .dark {
-  --background: #0F0E17;
-  --foreground: #EEEFFE;
+  --background: #0f0e17;
+  --foreground: #eeeffe;
   --card: #252340;
-  --card-foreground: #EEEFFE;
-  --popover: #1A1828;
-  --popover-foreground: #EEEFFE;
-  --primary: #7F77DD;
-  --primary-foreground: #EEEFFE;
+  --card-foreground: #eeeffe;
+  --popover: #1a1828;
+  --popover-foreground: #eeeffe;
+  --primary: #7f77dd;
+  --primary-foreground: #eeeffe;
   --secondary: #252340;
-  --secondary-foreground: #EEEFFE;
-  --muted: #1A1828;
-  --muted-foreground: #AFA9EC;
+  --secondary-foreground: #eeeffe;
+  --muted: #1a1828;
+  --muted-foreground: #afa9ec;
   --accent: #252340;
-  --accent-foreground: #AFA9EC;
+  --accent-foreground: #afa9ec;
   --border: rgba(127, 119, 221, 0.2);
   --input: rgba(127, 119, 221, 0.15);
-  --ring: #7F77DD;
+  --ring: #7f77dd;
   --destructive: #f87171;
   --radius: 0.625rem;
+  --chart: rgb(135, 126, 234);
 }
 
 @layer base {
