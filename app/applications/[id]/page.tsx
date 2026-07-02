@@ -30,6 +30,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 const sources = ["Linkedin", "Company site", "Referral", "Other"] as const;
 
@@ -67,12 +68,14 @@ export default function ApplicationDetailsPage() {
 
   const handleDelete = () => {
     deleteApplication(id);
+    toast.success("Application deleted");
     router.push("/applications");
   };
 
   const handleUpdate = () => {
     updateApplication(id, form);
     setIsEditing(false);
+    toast.success("Application updated");
   };
 
   const status = statusConfig[application.status];

@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
+import { toast } from "sonner";
 
 type Props = {
   onClose: () => void;
@@ -65,6 +66,8 @@ export default function ApplicationForm({ onClose }: Props) {
       notes: form.notes,
       appliedAt: form.appliedAt,
     });
+
+    toast.success("Application has been added")
 
     onClose();
   };

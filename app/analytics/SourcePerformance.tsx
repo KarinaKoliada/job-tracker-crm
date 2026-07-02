@@ -1,5 +1,5 @@
 "use client";
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
 import { Card } from "@/components/ui/card";
 import { getSourcePerformance } from "@/lib/analyticsStats";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";

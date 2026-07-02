@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { exportToCSV, exportToJSON, importFromJSON } from "@/lib/exportData";
 import { useApplicationsStore } from "@/store/useApplications";
 import ThemeToggle from "@/components/theme-toggle";
+import { toast } from "sonner";
 
 export default function SettingsPage() {
   const applications = useApplicationsStore((state) => state.applications);
@@ -13,12 +14,6 @@ export default function SettingsPage() {
     (state) => state.setApplications,
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [message, setMessage] = useState<string | null>(null);
-
-  function showMessage(text: string) {
-    setMessage(text);
-    setTimeout(() => setMessage(null), 3000);
-  }
 
   function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -27,8 +22,8 @@ export default function SettingsPage() {
     importFromJSON(
       file,
       setApplications,
-      () => showMessage("✅ Data imported successfully"),
-      () => showMessage("❌ Invalid file format"),
+      () => toast.success("Data imported successfully"),
+      () => toast.error("Invalid file format"),
     );
 
     e.target.value = "";
@@ -76,10 +71,6 @@ export default function SettingsPage() {
         <Button variant="outline" onClick={() => fileInputRef.current?.click()}>
           Choose File
         </Button>
-
-        {message && (
-          <p className="mt-3 text-sm text-muted-foreground">{message}</p>
-        )}
       </Card>
     </div>
   );

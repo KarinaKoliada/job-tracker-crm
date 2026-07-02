@@ -3,6 +3,7 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Rubik } from "next/font/google";
+import { Toaster } from "sonner";
 
 
 
@@ -35,6 +36,7 @@ export default function RootLayout({
               <div className="max-w-7xl">{children}</div>
             </main>
           </div>
+          <Toaster position="top-right" richColors/>
         </ThemeProvider>
       </body>
     </html>

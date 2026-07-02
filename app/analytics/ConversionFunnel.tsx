@@ -1,9 +1,8 @@
 "use client";
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
 import { Card } from "@/components/ui/card";
 import { getLineData } from "@/lib/analyticsStats";
 import {
-
   CartesianGrid,
   Line,
   LineChart,
@@ -18,7 +17,7 @@ export function ConversionFunnel() {
   const data = getLineData(applications);
 
   return (
-    <Card >
+    <Card>
       <h2 className="font-medium mb-1">Interview Conversion Rate</h2>
       <p className="text-sm text-muted-foreground mb-4">
         Application funnel visualization

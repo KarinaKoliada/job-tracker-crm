@@ -1,4 +1,4 @@
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
 import { Card } from "@/components/ui/card";
 import { Clock } from "lucide-react";
 import { statusConfig } from "@/config/statusConfig";

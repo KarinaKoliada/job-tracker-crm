@@ -8,26 +8,27 @@ import { statusConfig } from "@/config/statusConfig";
 import { Filter } from "@/types/status";
 import { useState } from "react";
 import ApplicationDialog from "./ApplicationDialog";
-import { useApplicationsStore } from "@/ store/useApplications";
+import { useApplicationsStore } from "@/store/useApplications";
 import { useRouter } from "next/navigation";
 
- export  const getAvatarStyle = (company: string) => {
-    const colors = [
-      "bg-primary/10 text-primary",
-      "bg-pink-500/10 text-pink-500",
-      "bg-green-500/10 text-green-500",
-      "bg-yellow-500/10 text-yellow-500",
-      "bg-blue-500/10 text-blue-500",
-      "bg-purple-500/10 text-purple-500",
-    ];
+export const getAvatarStyle = (company: string) => {
+  const colors = [
+    "bg-primary/10 text-primary",
+    "bg-pink-500/10 text-pink-500",
+    "bg-green-500/10 text-green-500",
+    "bg-yellow-500/10 text-yellow-500",
+    "bg-blue-500/10 text-blue-500",
+    "bg-purple-500/10 text-purple-500",
+  ];
 
-    return colors[company.charCodeAt(0) % colors.length];
- };
-  
+  return colors[company.charCodeAt(0) % colors.length];
+};
+
 export default function ApplicationPage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
   const applications = useApplicationsStore((state) => state.applications);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const router = useRouter();
 
   const statusFiltered =
@@ -43,28 +44,34 @@ export default function ApplicationPage() {
     );
   });
 
+  const sortedApplications = [...filteredApplications].sort((a, b) => {
+    const dateA = new Date(a.appliedAt).getTime();
+    const dateB = new Date(b.appliedAt).getTime();
+    return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+  });
 
-  console.log("PAGE", applications);
   return (
     <div className="space-y-8">
       <ApplicationDialog />
-
       <div className="space-y-1">
         <h1 className="text-3xl text-foreground">Applications</h1>
         <p className="text-muted-foreground">
           Manage and filter your job applications
         </p>
       </div>
-
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between ">
         <Input
           value={search}
           placeholder="Search company or position"
           onChange={(e) => setSearch(e.target.value)}
-          className="md:max-w-sm"
+          className="flex-1"
         />
-
-        <div className="flex gap-2 flex-wrap">
+      <Button
+        onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+      >
+        {sortOrder === "asc" ? "Oldest first" : "Newest first"}
+      </Button>
+        <div className="flex gap-2 md:gap-4 flex-wrap">
           {filters.map((item) => {
             const isActive = item.value === filter;
 
@@ -82,7 +89,7 @@ export default function ApplicationPage() {
       </div>
 
       <div className="grid sm:grid-cols-2 xl:grid-cols-3  gap-4 md:gap-6">
-        {filteredApplications.map((item) => {
+        {sortedApplications.map((item) => {
           const status = statusConfig[item.status];
 
           return (
