@@ -31,6 +31,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import CoverLetter from "./CoverLetter";
 
 const sources = ["Linkedin", "Company site", "Referral", "Other"] as const;
 
@@ -248,6 +249,11 @@ export default function ApplicationDetailsPage() {
           </div>
         </CardContent>
       </Card>
+      <CoverLetter
+        company={application.company}
+        notes={application.notes ?? ''}
+        position={application.position}
+      />
       <div className="max-w-3xl  mx-auto flex gap-3">
         {isEditing ? (
           <>
