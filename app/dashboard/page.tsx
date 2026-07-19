@@ -9,7 +9,7 @@ export default function DashboardPage() {
         <h1 className="text-2xl font-bold">Dashboard</h1>
       </div>
       <DashboardStatsCards />
-      <div className=" grid gap-6 lg:grid-cols-2 lg:gap-4">
+      <div className=" grid gap-6 lg:grid-cols-[1fr_2fr] lg:gap-4">
         <StatusDistribution />
         <DashboardCards />
       </div>

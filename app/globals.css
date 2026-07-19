@@ -51,8 +51,7 @@
   --ring: #e11d48;
   --destructive: #dc2626;
   --radius: 0.625rem;
-  --chart: #5ea0e2;
-
+  --chart: #468cd1;
 }
 
 .dark {
@@ -87,5 +86,10 @@
   }
   html {
     @apply font-sans;
+  }
+  .recharts-wrapper:focus,
+  .recharts-surface:focus,
+  .recharts-layer:focus {
+    outline: none;
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { exportToCSV, exportToJSON, importFromJSON } from "@/lib/exportData";
@@ -36,7 +36,7 @@ export default function SettingsPage() {
       <Card className="p-6">
         <h2 className="font-medium mb-1">Appearance</h2>
         <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground mb-4">
             Switch between light and dark mode
           </p>
           <ThemeToggle />
@@ -68,9 +68,14 @@ export default function SettingsPage() {
           className="hidden"
           onChange={handleImport}
         />
-        <Button variant="outline" onClick={() => fileInputRef.current?.click()}>
-          Choose File
-        </Button>
+        <div>
+          <Button
+            variant="outline"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            Choose File
+          </Button>
+        </div>
       </Card>
     </div>
   );

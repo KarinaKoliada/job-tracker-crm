@@ -22,11 +22,11 @@ export function ApplicationsPerWeek() {
         Track your application activity
       </p>
       <ResponsiveContainer width="100%" height={250}>
-        <BarChart data={data}>
+        <BarChart data={data} style={{ outline: "none" }}>
           <XAxis dataKey="week" />
           <YAxis allowDecimals={false} />
-          <Tooltip />
-          <Bar dataKey="count" fill="var(--primary)" radius={[4, 4, 0, 0]} />
+          <Tooltip cursor={false} />
+          <Bar dataKey="count" fill="var(--primary)"  radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </Card>
