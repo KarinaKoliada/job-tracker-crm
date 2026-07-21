@@ -8,6 +8,9 @@ export default function Sidebar() {
 
   return (
     <aside className="w-44 border-r p-4 h-screen sticky top-0 flex flex-col ">
+      <Link href="/" className="text-sm font-medium text-primary mb-6 block">
+        ✦ JobTracker
+      </Link>
       <nav className="flex flex-col gap-4 flex-1">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
