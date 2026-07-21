@@ -9,7 +9,7 @@ import { Filter } from "@/types/status";
 import { useState } from "react";
 import ApplicationDialog from "./ApplicationDialog";
 import { useApplicationsStore } from "@/store/useApplications";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const getAvatarStyle = (company: string) => {
   const colors = [
@@ -25,7 +25,10 @@ export const getAvatarStyle = (company: string) => {
 };
 
 export default function ApplicationPage() {
-  const [filter, setFilter] = useState<Filter>("all");
+  const searchParams = useSearchParams();
+  const [filter, setFilter] = useState<Filter>(
+    (searchParams.get('filter') as Filter) ?? 'all'
+  )
   const [search, setSearch] = useState("");
   const applications = useApplicationsStore((state) => state.applications);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");

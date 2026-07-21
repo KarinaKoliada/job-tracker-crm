@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { statusConfig } from "@/config/statusConfig";
 import { getAvatarStyle } from "../applications/page";
+import { useRouter } from "next/navigation";
 
 export function DashboardCards() {
   const applications = useApplicationsStore((state) => state.applications);
@@ -21,6 +22,7 @@ export function DashboardCards() {
         new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime(),
     )
     .slice(0, 8);
+  const router = useRouter();
 
   return (
     <Card>
@@ -44,7 +46,11 @@ export function DashboardCards() {
             {recentApplications.map((app) => {
               const status = statusConfig[app.status];
               return (
-                <TableRow key={app.id}>
+                <TableRow
+                  key={app.id}
+                  onClick={() => router.push(`/applications/${app.id}`)}
+                  className="cursor-pointer hover:bg-muted"
+                >
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <div

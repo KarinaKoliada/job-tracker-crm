@@ -9,6 +9,7 @@ import {
   LucideUsers,
   LucideX,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function DashboardStatsCards() {
   const { applications } = useApplicationsStore();
@@ -27,6 +28,7 @@ export default function DashboardStatsCards() {
       icon: LucideBriefcase,
       color: "text-primary bg-orange-500/10",
       change: totalChange,
+      filter: "all",
     },
     {
       label: "Interviews",
@@ -34,6 +36,7 @@ export default function DashboardStatsCards() {
       icon: LucideUsers,
       color: "text-blue-500 bg-blue-500/10",
       change: interviewsChange,
+      filter: "interview",
     },
     {
       label: "Offers",
@@ -41,6 +44,7 @@ export default function DashboardStatsCards() {
       icon: LucideCheckCircle,
       color: "text-green-500 bg-green-500/10",
       change: offersChange,
+      filter: "offer",
     },
     {
       label: "Rejected",
@@ -48,6 +52,7 @@ export default function DashboardStatsCards() {
       icon: LucideX,
       color: "text-red-500 bg-red-500/10",
       change: rejectedChange,
+      filter: "rejected",
     },
   ];
 
@@ -56,32 +61,31 @@ export default function DashboardStatsCards() {
       {stats.map((stat) => {
         const Icon = stat.icon;
         return (
-          <Card
-            key={stat.label}
-            className="flex flex-row items-center justify-between p-4"
-          >
-            <CardHeader className="p-0 flex-1 min-w-0">
-              <CardTitle className="text-sm">
-                <p>{stat.label}</p>
-              </CardTitle>
-              <p className="text-2xl font-semibold">
-                {stat.value.toLocaleString()}
-              </p>
-              {stat.change !== null && (
-                <p
-                  className={`text-xs ${stat.change >= 0 ? "text-green-500" : "text-red-500"}`}
-                >
-                  {stat.change >= 0 ? "+" : ""}
-                  {stat.change.toFixed(0)}% from last month
+          <Link  key={stat.label} href={`/applications?filter=${stat.filter}`}>
+            <Card className="flex flex-row items-center justify-between p-4 cursor-pointer hover:bg-muted">
+              <CardHeader className="p-0 flex-1 min-w-0">
+                <CardTitle className="text-sm">
+                  <p>{stat.label}</p>
+                </CardTitle>
+                <p className="text-2xl font-semibold">
+                  {stat.value.toLocaleString()}
                 </p>
-              )}
-            </CardHeader>
-            <div
-              className={`w-10 h-10 rounded-lg flex items-center justify-center ${stat.color}`}
-            >
-              <Icon className="w-5 h-5" />
-            </div>
-          </Card>
+                {stat.change !== null && (
+                  <p
+                    className={`text-xs ${stat.change >= 0 ? "text-green-500" : "text-red-500"}`}
+                  >
+                    {stat.change >= 0 ? "+" : ""}
+                    {stat.change.toFixed(0)}% from last month
+                  </p>
+                )}
+              </CardHeader>
+              <div
+                className={`w-10 h-10 rounded-lg flex items-center justify-center ${stat.color}`}
+              >
+                <Icon className="w-5 h-5" />
+              </div>
+            </Card>
+          </Link>
         );
       })}
     </div>
